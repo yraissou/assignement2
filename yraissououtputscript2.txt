@@ -1,0 +1,447 @@
+Warning: Using a password on the command line interface can be insecure.
+ERROR 2 (HY000) at line 5: File 'datapatient.txt' not found (Errcode: 2 - No such file or directory)
+--------------
+LOAD DATA LOCAL INFILE  'datapatient.txt' INTO TABLE patient
+--------------
+
+--------------
+SELECT * FROM patient
+--------------
+
+Empty set (0.00 sec)
+
+--------------
+INSERT INTO patient VALUES (123456789, 'Yassin', 'Raissouni', NULL)
+--------------
+
+Query OK, 1 row affected (0.01 sec)
+
+--------------
+UPDATE patient SET FirstName='Bill', LastName='Gellar' WHERE OHIPNumber='110112113'
+--------------
+
+Query OK, 0 rows affected (0.01 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+--------------
+UPDATE patient SET FirstName='Sean', LastName='Gellar' WHERE OHIPNumber='444555666'
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+--------------
+UPDATE patient SET FirstName='Jon', LastName='Green' WHERE OHIPNumber='111222333'
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+--------------
+UPDATE patient SET FirstName='Colleen', LastName='Gellar' WHERE OHIPNumber='333444555'
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+--------------
+UPDATE patient SET FirstName='Scotty', LastName='Bing' WHERE OHIPNumber='667766777'
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+--------------
+UPDATE patient SET FirstName='Suzi', LastName='Bing' WHERE OHIPNumber='111222111'
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+--------------
+SELECT * FROM patient
+--------------
+
++------------+-----------+-----------+-----------------+
+| OHIPNumber | FirstName | LastName  | DocIdAssignedTo |
++------------+-----------+-----------+-----------------+
+|  123456789 | Yassin    | Raissouni | NULL            |
++------------+-----------+-----------+-----------------+
+1 row in set (0.00 sec)
+
+--------------
+SELECT * FROM doctor
+--------------
+
+Empty set (0.00 sec)
+
+--------------
+INSERT INTO doctor VALUES ('RD34', 'Bernie', 'Kavorikian', 'Urologist', 19800909, NULL)
+--------------
+
+Query OK, 1 row affected (0.01 sec)
+
+--------------
+INSERT INTO doctor VALUES ('GD56', 'Joey', 'Shabado', 'Podiatrist', 19600624, NULL)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+INSERT INTO doctor VALUES ('HT45', 'Ross', 'Clooney', 'Surgeon', 19870620, NULL)
+--------------
+
+Query OK, 1 row affected (0.02 sec)
+
+--------------
+INSERT INTO doctor VALUES ('YT67', 'Ben', 'Spock', 'Pediatrician', 19550220, NULL)
+--------------
+
+Query OK, 1 row affected (0.01 sec)
+
+--------------
+INSERT INTO doctor VALUES ('JK78', 'Mandy', 'Webster', 'Surgeon', 19900808, NULL)
+--------------
+
+Query OK, 1 row affected (0.01 sec)
+
+--------------
+INSERT INTO doctor VALUES ('SE66', 'Colleen', 'Aziz', 'Surgeon', 19890824, NULL)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+INSERT INTO doctor VALUES ('MR49', 'Nahid', 'Loukach', 'Generalist', 19920421, NULL)
+--------------
+
+Query OK, 1 row affected (0.01 sec)
+
+--------------
+SELECT * FROM doctor
+--------------
+
++---------------+-----------+------------+--------------+-------------+----------------+
+| LicenseNumber | FirstName | LastName   | Speciality   | DateLicense | WorksInHosCode |
++---------------+-----------+------------+--------------+-------------+----------------+
+| GD56          | Joey      | Shabado    | Podiatrist   | 1960-06-24  | NULL           |
+| HT45          | Ross      | Clooney    | Surgeon      | 1987-06-20  | NULL           |
+| JK78          | Mandy     | Webster    | Surgeon      | 1990-08-08  | NULL           |
+| MR49          | Nahid     | Loukach    | Generalist   | 1992-04-21  | NULL           |
+| RD34          | Bernie    | Kavorikian | Urologist    | 1980-09-09  | NULL           |
+| SE66          | Colleen   | Aziz       | Surgeon      | 1989-08-24  | NULL           |
+| YT67          | Ben       | Spock      | Pediatrician | 1955-02-20  | NULL           |
++---------------+-----------+------------+--------------+-------------+----------------+
+7 rows in set (0.00 sec)
+
+--------------
+SELECT * FROM hospital
+--------------
+
+Empty set (0.00 sec)
+
+--------------
+INSERT INTO hospital VALUES ('BBC', 'St.Joseph', 1000, 'London', 'On', NULL)
+--------------
+
+Query OK, 1 row affected (0.02 sec)
+
+--------------
+INSERT INTO hospital VALUES ('ABC', 'Victoria', 1600, 'London', 'On', NULL)
+--------------
+
+Query OK, 1 row affected (0.01 sec)
+
+--------------
+INSERT INTO hospital VALUES ('DDE', 'Victoria', 1200, 'Victoria', 'BC', NULL)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+SELECT * FROM hospital
+--------------
+
++--------------+-----------+--------------+----------+----------+-----------+
+| HospitalCode | Name      | NumberOfBeds | City     | Province | HeadDocId |
++--------------+-----------+--------------+----------+----------+-----------+
+| ABC          | Victoria  |         1600 | London   | On       | NULL      |
+| BBC          | St.Joseph |         1000 | London   | On       | NULL      |
+| DDE          | Victoria  |         1200 | Victoria | BC       | NULL      |
++--------------+-----------+--------------+----------+----------+-----------+
+3 rows in set (0.00 sec)
+
+--------------
+SELECT * FROM treats
+--------------
+
+Empty set (0.00 sec)
+
+ERROR 1452 (23000) at line 54: Cannot add or update a child row: a foreign key constraint fails (`yraissouassign2db`.`treats`, CONSTRAINT `treats_ibfk_1` FOREIGN KEY (`pOHIPNumber`) REFERENCES `patient` (`OHIPNumber`))
+ERROR 1452 (23000) at line 55: Cannot add or update a child row: a foreign key constraint fails (`yraissouassign2db`.`treats`, CONSTRAINT `treats_ibfk_1` FOREIGN KEY (`pOHIPNumber`) REFERENCES `patient` (`OHIPNumber`))
+ERROR 1452 (23000) at line 56: Cannot add or update a child row: a foreign key constraint fails (`yraissouassign2db`.`treats`, CONSTRAINT `treats_ibfk_1` FOREIGN KEY (`pOHIPNumber`) REFERENCES `patient` (`OHIPNumber`))
+ERROR 1452 (23000) at line 57: Cannot add or update a child row: a foreign key constraint fails (`yraissouassign2db`.`treats`, CONSTRAINT `treats_ibfk_1` FOREIGN KEY (`pOHIPNumber`) REFERENCES `patient` (`OHIPNumber`))
+ERROR 1452 (23000) at line 58: Cannot add or update a child row: a foreign key constraint fails (`yraissouassign2db`.`treats`, CONSTRAINT `treats_ibfk_1` FOREIGN KEY (`pOHIPNumber`) REFERENCES `patient` (`OHIPNumber`))
+ERROR 1452 (23000) at line 59: Cannot add or update a child row: a foreign key constraint fails (`yraissouassign2db`.`treats`, CONSTRAINT `treats_ibfk_1` FOREIGN KEY (`pOHIPNumber`) REFERENCES `patient` (`OHIPNumber`))
+ERROR 1452 (23000) at line 60: Cannot add or update a child row: a foreign key constraint fails (`yraissouassign2db`.`treats`, CONSTRAINT `treats_ibfk_1` FOREIGN KEY (`pOHIPNumber`) REFERENCES `patient` (`OHIPNumber`))
+ERROR 1452 (23000) at line 61: Cannot add or update a child row: a foreign key constraint fails (`yraissouassign2db`.`treats`, CONSTRAINT `treats_ibfk_1` FOREIGN KEY (`pOHIPNumber`) REFERENCES `patient` (`OHIPNumber`))
+ERROR 1452 (23000) at line 62: Cannot add or update a child row: a foreign key constraint fails (`yraissouassign2db`.`treats`, CONSTRAINT `treats_ibfk_1` FOREIGN KEY (`pOHIPNumber`) REFERENCES `patient` (`OHIPNumber`))
+ERROR 1452 (23000) at line 63: Cannot add or update a child row: a foreign key constraint fails (`yraissouassign2db`.`treats`, CONSTRAINT `treats_ibfk_1` FOREIGN KEY (`pOHIPNumber`) REFERENCES `patient` (`OHIPNumber`))
+ERROR 1452 (23000) at line 64: Cannot add or update a child row: a foreign key constraint fails (`yraissouassign2db`.`treats`, CONSTRAINT `treats_ibfk_1` FOREIGN KEY (`pOHIPNumber`) REFERENCES `patient` (`OHIPNumber`))
+--------------
+INSERT INTO treats VALUES (110112113, 'Bill', 'Gellar', 'Shabado')
+--------------
+
+--------------
+INSERT INTO treats VALUES (444555666, 'Sean', 'Gellar', 'Clooney')
+--------------
+
+--------------
+INSERT INTO treats VALUES (444555666, 'Sean', 'Gellar', 'Webster')
+--------------
+
+--------------
+INSERT INTO treats VALUES (111222333, 'Jon', 'Green', 'Webster')
+--------------
+
+--------------
+INSERT INTO treats VALUES (111222333, 'Jon', 'Green', 'Aziz')
+--------------
+
+--------------
+INSERT INTO treats VALUES (111222333, 'Jon', 'Green', 'Spock')
+--------------
+
+--------------
+INSERT INTO treats VALUES (333444555, 'Colleen', 'Gellar', 'Shabado')
+--------------
+
+--------------
+INSERT INTO treats VALUES (667766777, 'Scotty', 'Bing', 'Shabado')
+--------------
+
+--------------
+INSERT INTO treats VALUES (667766777, 'Scotty', 'Bing', 'Webster')
+--------------
+
+--------------
+INSERT INTO treats VALUES (667766777, 'Scotty', 'Bing', 'Spock')
+--------------
+
+--------------
+INSERT INTO treats VALUES (111222111, 'Suzzi', 'Bing', 'Spock')
+--------------
+
+--------------
+INSERT INTO treats VALUES (123456789, 'Yassin', 'Raissouni', 'Loukach')
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+SELECT * FROM treats
+--------------
+
++-------------+------------+-----------+------------+
+| pOHIPNumber | pFirstName | pLastName | drLastName |
++-------------+------------+-----------+------------+
+|   123456789 | Yassin     | Raissouni | Loukach    |
++-------------+------------+-----------+------------+
+1 row in set (0.00 sec)
+
+--------------
+SELECT * FROM doctor
+--------------
+
++---------------+-----------+------------+--------------+-------------+----------------+
+| LicenseNumber | FirstName | LastName   | Speciality   | DateLicense | WorksInHosCode |
++---------------+-----------+------------+--------------+-------------+----------------+
+| GD56          | Joey      | Shabado    | Podiatrist   | 1960-06-24  | NULL           |
+| HT45          | Ross      | Clooney    | Surgeon      | 1987-06-20  | NULL           |
+| JK78          | Mandy     | Webster    | Surgeon      | 1990-08-08  | NULL           |
+| MR49          | Nahid     | Loukach    | Generalist   | 1992-04-21  | NULL           |
+| RD34          | Bernie    | Kavorikian | Urologist    | 1980-09-09  | NULL           |
+| SE66          | Colleen   | Aziz       | Surgeon      | 1989-08-24  | NULL           |
+| YT67          | Ben       | Spock      | Pediatrician | 1955-02-20  | NULL           |
++---------------+-----------+------------+--------------+-------------+----------------+
+7 rows in set (0.00 sec)
+
+--------------
+UPDATE doctor SET WorksInHosCode='BBC' WHERE LicenseNumber='RD34'
+--------------
+
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+--------------
+UPDATE doctor SET WorksInHosCode='BBC' WHERE LicenseNumber='GD56'
+--------------
+
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+--------------
+UPDATE doctor SET WorksInHosCode='DDE' WHERE LicenseNumber='HT45'
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+--------------
+UPDATE doctor SET WorksInHosCode='DDE' WHERE LicenseNumber='YT67'
+--------------
+
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+--------------
+UPDATE doctor SET WorksInHosCode='BBC' WHERE LicenseNumber='JK78'
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+--------------
+UPDATE doctor SET WorksInHosCode='ABC' WHERE LicenseNumber='SE66'
+--------------
+
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+--------------
+UPDATE doctor SET WorksInHosCode='ABC' WHERE LicenseNumber='MR49'
+--------------
+
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+--------------
+SELECT * FROM doctor
+--------------
+
++---------------+-----------+------------+--------------+-------------+----------------+
+| LicenseNumber | FirstName | LastName   | Speciality   | DateLicense | WorksInHosCode |
++---------------+-----------+------------+--------------+-------------+----------------+
+| GD56          | Joey      | Shabado    | Podiatrist   | 1960-06-24  | BBC            |
+| HT45          | Ross      | Clooney    | Surgeon      | 1987-06-20  | DDE            |
+| JK78          | Mandy     | Webster    | Surgeon      | 1990-08-08  | BBC            |
+| MR49          | Nahid     | Loukach    | Generalist   | 1992-04-21  | ABC            |
+| RD34          | Bernie    | Kavorikian | Urologist    | 1980-09-09  | BBC            |
+| SE66          | Colleen   | Aziz       | Surgeon      | 1989-08-24  | ABC            |
+| YT67          | Ben       | Spock      | Pediatrician | 1955-02-20  | DDE            |
++---------------+-----------+------------+--------------+-------------+----------------+
+7 rows in set (0.00 sec)
+
+--------------
+ALTER TABLE hospital ADD DateOfStart DATE
+--------------
+
+Query OK, 0 rows affected (0.30 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+--------------
+SELECT * FROM hospital
+--------------
+
++--------------+-----------+--------------+----------+----------+-----------+-------------+
+| HospitalCode | Name      | NumberOfBeds | City     | Province | HeadDocId | DateOfStart |
++--------------+-----------+--------------+----------+----------+-----------+-------------+
+| ABC          | Victoria  |         1600 | London   | On       | NULL      | NULL        |
+| BBC          | St.Joseph |         1000 | London   | On       | NULL      | NULL        |
+| DDE          | Victoria  |         1200 | Victoria | BC       | NULL      | NULL        |
++--------------+-----------+--------------+----------+----------+-----------+-------------+
+3 rows in set (0.00 sec)
+
+--------------
+UPDATE hospital SET HeadDocId='GD56', DateOfStart='19990910' WHERE Name='St.Joseph'
+--------------
+
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+--------------
+UPDATE hospital SET HeadDocId='YT67', DateOfStart='19971207' WHERE City='Victoria'
+--------------
+
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+--------------
+UPDATE hospital SET HeadDocId='SE66', DateOfStart='19941205' WHERE HospitalCode='ABC'
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+--------------
+SELECT * FROM hospital
+--------------
+
++--------------+-----------+--------------+----------+----------+-----------+-------------+
+| HospitalCode | Name      | NumberOfBeds | City     | Province | HeadDocId | DateOfStart |
++--------------+-----------+--------------+----------+----------+-----------+-------------+
+| ABC          | Victoria  |         1600 | London   | On       | SE66      | 1994-12-05  |
+| BBC          | St.Joseph |         1000 | London   | On       | GD56      | 1999-09-10  |
+| DDE          | Victoria  |         1200 | Victoria | BC       | YT67      | 1997-12-07  |
++--------------+-----------+--------------+----------+----------+-----------+-------------+
+3 rows in set (0.00 sec)
+
+--------------
+SELECT * FROM patient
+--------------
+
++------------+-----------+-----------+-----------------+
+| OHIPNumber | FirstName | LastName  | DocIdAssignedTo |
++------------+-----------+-----------+-----------------+
+|  123456789 | Yassin    | Raissouni | NULL            |
++------------+-----------+-----------+-----------------+
+1 row in set (0.00 sec)
+
+--------------
+UPDATE patient SET LastName='Brown' WHERE OHIPNumber=111222111
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+--------------
+SELECT * FROM patient
+--------------
+
++------------+-----------+-----------+-----------------+
+| OHIPNumber | FirstName | LastName  | DocIdAssignedTo |
++------------+-----------+-----------+-----------------+
+|  123456789 | Yassin    | Raissouni | NULL            |
++------------+-----------+-----------+-----------------+
+1 row in set (0.00 sec)
+
+--------------
+SELECT * FROM treats
+--------------
+
++-------------+------------+-----------+------------+
+| pOHIPNumber | pFirstName | pLastName | drLastName |
++-------------+------------+-----------+------------+
+|   123456789 | Yassin     | Raissouni | Loukach    |
++-------------+------------+-----------+------------+
+1 row in set (0.00 sec)
+
+--------------
+UPDATE treats SET drLastName='Clooney' WHERE drLastName='Spock'
+--------------
+
+Query OK, 0 rows affected (0.01 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+--------------
+SELECT * FROM treats
+--------------
+
++-------------+------------+-----------+------------+
+| pOHIPNumber | pFirstName | pLastName | drLastName |
++-------------+------------+-----------+------------+
+|   123456789 | Yassin     | Raissouni | Loukach    |
++-------------+------------+-----------+------------+
+1 row in set (0.00 sec)
+
+Bye

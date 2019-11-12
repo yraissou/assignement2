@@ -1,0 +1,125 @@
+Warning: Using a password on the command line interface can be insecure.
+--------------
+SHOW DATABASES
+--------------
+
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| data               |
+| flipped4db         |
+| mysql              |
+| performance_schema |
+| vetoffice          |
+| yraissouassign2db  |
++--------------------+
+7 rows in set (0.01 sec)
+
+--------------
+DROP DATABASE IF EXISTS yraissouassign2db
+--------------
+
+Query OK, 4 rows affected (0.15 sec)
+
+--------------
+CREATE DATABASE yraissouassign2db
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+SHOW TABLES
+--------------
+
+Empty set (0.00 sec)
+
+--------------
+CREATE TABLE doctor ( LicenseNumber VARCHAR(4) NOT NULL, FirstName VARCHAR(20), LastName VARCHAR(20), Speciality VARCHAR(30), DateLicense DATE, WorksInHosCode VARCHAR(3), PRIMARY KEY (LicenseNumber))
+--------------
+
+Query OK, 0 rows affected (0.35 sec)
+
+--------------
+CREATE TABLE hospital ( HospitalCode VARCHAR(3) NOT NULL, Name VARCHAR(20), NumberOfBeds INT, City VARCHAR(20), Province VARCHAR(2), HeadDocId VARCHAR(4), PRIMARY KEY (HospitalCode), CONSTRAINT HeadDocId FOREIGN KEY (HeadDocId) REFERENCES doctor(LicenseNumber) )
+--------------
+
+Query OK, 0 rows affected (0.08 sec)
+
+--------------
+ALTER TABLE doctor ADD FOREIGN KEY (WorksInHosCode) REFERENCES hospital(HospitalCode)
+--------------
+
+Query OK, 0 rows affected (0.15 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+--------------
+CREATE TABLE patient ( OHIPNumber INT(9) NOT NULL, FirstName VARCHAR(20), LastName VARCHAR(20), DocIdAssignedTo VARCHAR(4))
+--------------
+
+Query OK, 0 rows affected (0.06 sec)
+
+--------------
+ALTER TABLE patient ADD PRIMARY KEY (OHIPNumber)
+--------------
+
+Query OK, 0 rows affected (0.11 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+--------------
+ALTER TABLE patient ADD FOREIGN KEY (DocIdAssignedTo) REFERENCES doctor(LicenseNumber)
+--------------
+
+Query OK, 0 rows affected (0.28 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+--------------
+CREATE TABLE treats ( pOHIPNumber INT(9), pFirstName VARCHAR(20), pLastName VARCHAR(20), drLastName VARCHAR(20))
+--------------
+
+Query OK, 0 rows affected (0.11 sec)
+
+--------------
+ALTER TABLE treats ADD PRIMARY KEY (pOHIPNumber, drLastName)
+--------------
+
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+--------------
+ALTER TABLE treats ADD FOREIGN KEY (pOHIPNumber) REFERENCES patient(OHIPNumber)
+--------------
+
+Query OK, 0 rows affected (0.10 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+ERROR 1215 (HY000) at line 44: Cannot add foreign key constraint
+ERROR 1215 (HY000) at line 47: Cannot add foreign key constraint
+ERROR 1215 (HY000) at line 50: Cannot add foreign key constraint
+--------------
+ALTER TABLE treats ADD FOREIGN KEY (pFirstName) REFERENCES patient(FirstName)
+--------------
+
+--------------
+ALTER TABLE treats ADD FOREIGN KEY (pLastName) REFERENCES patient(LastName)
+--------------
+
+--------------
+ALTER TABLE treats ADD FOREIGN KEY (drLastName) REFERENCES doctor(drLastName)
+--------------
+
+--------------
+SHOW TABLES
+--------------
+
++-----------------------------+
+| Tables_in_yraissouassign2db |
++-----------------------------+
+| doctor                      |
+| hospital                    |
+| patient                     |
+| treats                      |
++-----------------------------+
+4 rows in set (0.00 sec)
+
+Bye

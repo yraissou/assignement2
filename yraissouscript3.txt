@@ -22,7 +22,7 @@ SELECT FirstName, LastName FROM patient WHERE LastName LIKE "G%";
 SELECT pFirstName, pLastName FROM treats WHERE drLastName='Clooney';
 
 -- Query 8
-SELECT Name, City, LastName from (SELECT* FROM doctor, hospital WHERE HeadDocId=LicenseNumber) as a;
+SELECT Name, City, LastName FROM (SELECT* FROM doctor, hospital WHERE HeadDocId=LicenseNumber) as a;
 
 -- Query 9
 SELECT SUM(NumberOfBeds) as 'Total Number of Beds' from hospital;

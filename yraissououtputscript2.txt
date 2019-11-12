@@ -1,62 +1,74 @@
 Warning: Using a password on the command line interface can be insecure.
-ERROR 2 (HY000) at line 5: File 'datapatient.txt' not found (Errcode: 2 - No such file or directory)
 --------------
 LOAD DATA LOCAL INFILE  'datapatient.txt' INTO TABLE patient
 --------------
+
+Query OK, 6 rows affected, 24 warnings (0.01 sec)
+Records: 6  Deleted: 0  Skipped: 0  Warnings: 24
 
 --------------
 SELECT * FROM patient
 --------------
 
-Empty set (0.00 sec)
++------------+-----------+----------+-----------------+
+| OHIPNumber | FirstName | LastName | DocIdAssignedTo |
++------------+-----------+----------+-----------------+
+|  110112113 | NULL      | NULL     | NULL            |
+|  111222111 | NULL      | NULL     | NULL            |
+|  111222333 | NULL      | NULL     | NULL            |
+|  333444555 | NULL      | NULL     | NULL            |
+|  444555666 | NULL      | NULL     | NULL            |
+|  667766777 | NULL      | NULL     | NULL            |
++------------+-----------+----------+-----------------+
+6 rows in set (0.00 sec)
 
 --------------
 INSERT INTO patient VALUES (123456789, 'Yassin', 'Raissouni', NULL)
 --------------
 
-Query OK, 1 row affected (0.01 sec)
+Query OK, 1 row affected (0.03 sec)
 
 --------------
 UPDATE patient SET FirstName='Bill', LastName='Gellar' WHERE OHIPNumber='110112113'
 --------------
 
-Query OK, 0 rows affected (0.01 sec)
-Rows matched: 0  Changed: 0  Warnings: 0
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
 
 --------------
 UPDATE patient SET FirstName='Sean', LastName='Gellar' WHERE OHIPNumber='444555666'
 --------------
 
-Query OK, 0 rows affected (0.00 sec)
-Rows matched: 0  Changed: 0  Warnings: 0
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
 
 --------------
 UPDATE patient SET FirstName='Jon', LastName='Green' WHERE OHIPNumber='111222333'
 --------------
 
-Query OK, 0 rows affected (0.00 sec)
-Rows matched: 0  Changed: 0  Warnings: 0
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
 
 --------------
 UPDATE patient SET FirstName='Colleen', LastName='Gellar' WHERE OHIPNumber='333444555'
 --------------
 
-Query OK, 0 rows affected (0.00 sec)
-Rows matched: 0  Changed: 0  Warnings: 0
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
 
 --------------
 UPDATE patient SET FirstName='Scotty', LastName='Bing' WHERE OHIPNumber='667766777'
 --------------
 
-Query OK, 0 rows affected (0.00 sec)
-Rows matched: 0  Changed: 0  Warnings: 0
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
 
 --------------
 UPDATE patient SET FirstName='Suzi', LastName='Bing' WHERE OHIPNumber='111222111'
 --------------
 
-Query OK, 0 rows affected (0.00 sec)
-Rows matched: 0  Changed: 0  Warnings: 0
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
 
 --------------
 SELECT * FROM patient
@@ -65,9 +77,15 @@ SELECT * FROM patient
 +------------+-----------+-----------+-----------------+
 | OHIPNumber | FirstName | LastName  | DocIdAssignedTo |
 +------------+-----------+-----------+-----------------+
+|  110112113 | Bill      | Gellar    | NULL            |
+|  111222111 | Suzi      | Bing      | NULL            |
+|  111222333 | Jon       | Green     | NULL            |
 |  123456789 | Yassin    | Raissouni | NULL            |
+|  333444555 | Colleen   | Gellar    | NULL            |
+|  444555666 | Sean      | Gellar    | NULL            |
+|  667766777 | Scotty    | Bing      | NULL            |
 +------------+-----------+-----------+-----------------+
-1 row in set (0.00 sec)
+7 rows in set (0.00 sec)
 
 --------------
 SELECT * FROM doctor
@@ -79,19 +97,19 @@ Empty set (0.00 sec)
 INSERT INTO doctor VALUES ('RD34', 'Bernie', 'Kavorikian', 'Urologist', 19800909, NULL)
 --------------
 
-Query OK, 1 row affected (0.01 sec)
+Query OK, 1 row affected (0.03 sec)
 
 --------------
 INSERT INTO doctor VALUES ('GD56', 'Joey', 'Shabado', 'Podiatrist', 19600624, NULL)
 --------------
 
-Query OK, 1 row affected (0.00 sec)
+Query OK, 1 row affected (0.01 sec)
 
 --------------
 INSERT INTO doctor VALUES ('HT45', 'Ross', 'Clooney', 'Surgeon', 19870620, NULL)
 --------------
 
-Query OK, 1 row affected (0.02 sec)
+Query OK, 1 row affected (0.03 sec)
 
 --------------
 INSERT INTO doctor VALUES ('YT67', 'Ben', 'Spock', 'Pediatrician', 19550220, NULL)
@@ -144,19 +162,19 @@ Empty set (0.00 sec)
 INSERT INTO hospital VALUES ('BBC', 'St.Joseph', 1000, 'London', 'On', NULL)
 --------------
 
-Query OK, 1 row affected (0.02 sec)
+Query OK, 1 row affected (0.01 sec)
 
 --------------
 INSERT INTO hospital VALUES ('ABC', 'Victoria', 1600, 'London', 'On', NULL)
 --------------
 
-Query OK, 1 row affected (0.01 sec)
+Query OK, 1 row affected (0.00 sec)
 
 --------------
 INSERT INTO hospital VALUES ('DDE', 'Victoria', 1200, 'Victoria', 'BC', NULL)
 --------------
 
-Query OK, 1 row affected (0.00 sec)
+Query OK, 1 row affected (0.01 sec)
 
 --------------
 SELECT * FROM hospital
@@ -177,60 +195,71 @@ SELECT * FROM treats
 
 Empty set (0.00 sec)
 
-ERROR 1452 (23000) at line 54: Cannot add or update a child row: a foreign key constraint fails (`yraissouassign2db`.`treats`, CONSTRAINT `treats_ibfk_1` FOREIGN KEY (`pOHIPNumber`) REFERENCES `patient` (`OHIPNumber`))
-ERROR 1452 (23000) at line 55: Cannot add or update a child row: a foreign key constraint fails (`yraissouassign2db`.`treats`, CONSTRAINT `treats_ibfk_1` FOREIGN KEY (`pOHIPNumber`) REFERENCES `patient` (`OHIPNumber`))
-ERROR 1452 (23000) at line 56: Cannot add or update a child row: a foreign key constraint fails (`yraissouassign2db`.`treats`, CONSTRAINT `treats_ibfk_1` FOREIGN KEY (`pOHIPNumber`) REFERENCES `patient` (`OHIPNumber`))
-ERROR 1452 (23000) at line 57: Cannot add or update a child row: a foreign key constraint fails (`yraissouassign2db`.`treats`, CONSTRAINT `treats_ibfk_1` FOREIGN KEY (`pOHIPNumber`) REFERENCES `patient` (`OHIPNumber`))
-ERROR 1452 (23000) at line 58: Cannot add or update a child row: a foreign key constraint fails (`yraissouassign2db`.`treats`, CONSTRAINT `treats_ibfk_1` FOREIGN KEY (`pOHIPNumber`) REFERENCES `patient` (`OHIPNumber`))
-ERROR 1452 (23000) at line 59: Cannot add or update a child row: a foreign key constraint fails (`yraissouassign2db`.`treats`, CONSTRAINT `treats_ibfk_1` FOREIGN KEY (`pOHIPNumber`) REFERENCES `patient` (`OHIPNumber`))
-ERROR 1452 (23000) at line 60: Cannot add or update a child row: a foreign key constraint fails (`yraissouassign2db`.`treats`, CONSTRAINT `treats_ibfk_1` FOREIGN KEY (`pOHIPNumber`) REFERENCES `patient` (`OHIPNumber`))
-ERROR 1452 (23000) at line 61: Cannot add or update a child row: a foreign key constraint fails (`yraissouassign2db`.`treats`, CONSTRAINT `treats_ibfk_1` FOREIGN KEY (`pOHIPNumber`) REFERENCES `patient` (`OHIPNumber`))
-ERROR 1452 (23000) at line 62: Cannot add or update a child row: a foreign key constraint fails (`yraissouassign2db`.`treats`, CONSTRAINT `treats_ibfk_1` FOREIGN KEY (`pOHIPNumber`) REFERENCES `patient` (`OHIPNumber`))
-ERROR 1452 (23000) at line 63: Cannot add or update a child row: a foreign key constraint fails (`yraissouassign2db`.`treats`, CONSTRAINT `treats_ibfk_1` FOREIGN KEY (`pOHIPNumber`) REFERENCES `patient` (`OHIPNumber`))
-ERROR 1452 (23000) at line 64: Cannot add or update a child row: a foreign key constraint fails (`yraissouassign2db`.`treats`, CONSTRAINT `treats_ibfk_1` FOREIGN KEY (`pOHIPNumber`) REFERENCES `patient` (`OHIPNumber`))
 --------------
 INSERT INTO treats VALUES (110112113, 'Bill', 'Gellar', 'Shabado')
 --------------
+
+Query OK, 1 row affected (0.01 sec)
 
 --------------
 INSERT INTO treats VALUES (444555666, 'Sean', 'Gellar', 'Clooney')
 --------------
 
+Query OK, 1 row affected (0.00 sec)
+
 --------------
 INSERT INTO treats VALUES (444555666, 'Sean', 'Gellar', 'Webster')
 --------------
+
+Query OK, 1 row affected (0.02 sec)
 
 --------------
 INSERT INTO treats VALUES (111222333, 'Jon', 'Green', 'Webster')
 --------------
 
+Query OK, 1 row affected (0.01 sec)
+
 --------------
 INSERT INTO treats VALUES (111222333, 'Jon', 'Green', 'Aziz')
 --------------
+
+Query OK, 1 row affected (0.00 sec)
 
 --------------
 INSERT INTO treats VALUES (111222333, 'Jon', 'Green', 'Spock')
 --------------
 
+Query OK, 1 row affected (0.01 sec)
+
 --------------
 INSERT INTO treats VALUES (333444555, 'Colleen', 'Gellar', 'Shabado')
 --------------
+
+Query OK, 1 row affected (0.01 sec)
 
 --------------
 INSERT INTO treats VALUES (667766777, 'Scotty', 'Bing', 'Shabado')
 --------------
 
+Query OK, 1 row affected (0.01 sec)
+
 --------------
 INSERT INTO treats VALUES (667766777, 'Scotty', 'Bing', 'Webster')
 --------------
+
+Query OK, 1 row affected (0.00 sec)
 
 --------------
 INSERT INTO treats VALUES (667766777, 'Scotty', 'Bing', 'Spock')
 --------------
 
+Query OK, 1 row affected (0.01 sec)
+
 --------------
 INSERT INTO treats VALUES (111222111, 'Suzzi', 'Bing', 'Spock')
 --------------
+
+Query OK, 1 row affected (0.01 sec)
 
 --------------
 INSERT INTO treats VALUES (123456789, 'Yassin', 'Raissouni', 'Loukach')
@@ -245,9 +274,20 @@ SELECT * FROM treats
 +-------------+------------+-----------+------------+
 | pOHIPNumber | pFirstName | pLastName | drLastName |
 +-------------+------------+-----------+------------+
+|   110112113 | Bill       | Gellar    | Shabado    |
+|   111222111 | Suzzi      | Bing      | Spock      |
+|   111222333 | Jon        | Green     | Aziz       |
+|   111222333 | Jon        | Green     | Spock      |
+|   111222333 | Jon        | Green     | Webster    |
 |   123456789 | Yassin     | Raissouni | Loukach    |
+|   333444555 | Colleen    | Gellar    | Shabado    |
+|   444555666 | Sean       | Gellar    | Clooney    |
+|   444555666 | Sean       | Gellar    | Webster    |
+|   667766777 | Scotty     | Bing      | Shabado    |
+|   667766777 | Scotty     | Bing      | Spock      |
+|   667766777 | Scotty     | Bing      | Webster    |
 +-------------+------------+-----------+------------+
-1 row in set (0.00 sec)
+12 rows in set (0.01 sec)
 
 --------------
 SELECT * FROM doctor
@@ -270,7 +310,7 @@ SELECT * FROM doctor
 UPDATE doctor SET WorksInHosCode='BBC' WHERE LicenseNumber='RD34'
 --------------
 
-Query OK, 1 row affected (0.01 sec)
+Query OK, 1 row affected (0.00 sec)
 Rows matched: 1  Changed: 1  Warnings: 0
 
 --------------
@@ -284,28 +324,28 @@ Rows matched: 1  Changed: 1  Warnings: 0
 UPDATE doctor SET WorksInHosCode='DDE' WHERE LicenseNumber='HT45'
 --------------
 
-Query OK, 1 row affected (0.00 sec)
+Query OK, 1 row affected (0.01 sec)
 Rows matched: 1  Changed: 1  Warnings: 0
 
 --------------
 UPDATE doctor SET WorksInHosCode='DDE' WHERE LicenseNumber='YT67'
 --------------
 
-Query OK, 1 row affected (0.01 sec)
+Query OK, 1 row affected (0.00 sec)
 Rows matched: 1  Changed: 1  Warnings: 0
 
 --------------
 UPDATE doctor SET WorksInHosCode='BBC' WHERE LicenseNumber='JK78'
 --------------
 
-Query OK, 1 row affected (0.00 sec)
+Query OK, 1 row affected (0.01 sec)
 Rows matched: 1  Changed: 1  Warnings: 0
 
 --------------
 UPDATE doctor SET WorksInHosCode='ABC' WHERE LicenseNumber='SE66'
 --------------
 
-Query OK, 1 row affected (0.01 sec)
+Query OK, 1 row affected (0.00 sec)
 Rows matched: 1  Changed: 1  Warnings: 0
 
 --------------
@@ -336,7 +376,7 @@ SELECT * FROM doctor
 ALTER TABLE hospital ADD DateOfStart DATE
 --------------
 
-Query OK, 0 rows affected (0.30 sec)
+Query OK, 0 rows affected (0.26 sec)
 Records: 0  Duplicates: 0  Warnings: 0
 
 --------------
@@ -363,14 +403,14 @@ Rows matched: 1  Changed: 1  Warnings: 0
 UPDATE hospital SET HeadDocId='YT67', DateOfStart='19971207' WHERE City='Victoria'
 --------------
 
-Query OK, 1 row affected (0.01 sec)
+Query OK, 1 row affected (0.05 sec)
 Rows matched: 1  Changed: 1  Warnings: 0
 
 --------------
 UPDATE hospital SET HeadDocId='SE66', DateOfStart='19941205' WHERE HospitalCode='ABC'
 --------------
 
-Query OK, 1 row affected (0.00 sec)
+Query OK, 1 row affected (0.02 sec)
 Rows matched: 1  Changed: 1  Warnings: 0
 
 --------------
@@ -393,16 +433,22 @@ SELECT * FROM patient
 +------------+-----------+-----------+-----------------+
 | OHIPNumber | FirstName | LastName  | DocIdAssignedTo |
 +------------+-----------+-----------+-----------------+
+|  110112113 | Bill      | Gellar    | NULL            |
+|  111222111 | Suzi      | Bing      | NULL            |
+|  111222333 | Jon       | Green     | NULL            |
 |  123456789 | Yassin    | Raissouni | NULL            |
+|  333444555 | Colleen   | Gellar    | NULL            |
+|  444555666 | Sean      | Gellar    | NULL            |
+|  667766777 | Scotty    | Bing      | NULL            |
 +------------+-----------+-----------+-----------------+
-1 row in set (0.00 sec)
+7 rows in set (0.00 sec)
 
 --------------
 UPDATE patient SET LastName='Brown' WHERE OHIPNumber=111222111
 --------------
 
-Query OK, 0 rows affected (0.00 sec)
-Rows matched: 0  Changed: 0  Warnings: 0
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
 
 --------------
 SELECT * FROM patient
@@ -411,9 +457,15 @@ SELECT * FROM patient
 +------------+-----------+-----------+-----------------+
 | OHIPNumber | FirstName | LastName  | DocIdAssignedTo |
 +------------+-----------+-----------+-----------------+
+|  110112113 | Bill      | Gellar    | NULL            |
+|  111222111 | Suzi      | Brown     | NULL            |
+|  111222333 | Jon       | Green     | NULL            |
 |  123456789 | Yassin    | Raissouni | NULL            |
+|  333444555 | Colleen   | Gellar    | NULL            |
+|  444555666 | Sean      | Gellar    | NULL            |
+|  667766777 | Scotty    | Bing      | NULL            |
 +------------+-----------+-----------+-----------------+
-1 row in set (0.00 sec)
+7 rows in set (0.00 sec)
 
 --------------
 SELECT * FROM treats
@@ -422,16 +474,27 @@ SELECT * FROM treats
 +-------------+------------+-----------+------------+
 | pOHIPNumber | pFirstName | pLastName | drLastName |
 +-------------+------------+-----------+------------+
+|   110112113 | Bill       | Gellar    | Shabado    |
+|   111222111 | Suzzi      | Bing      | Spock      |
+|   111222333 | Jon        | Green     | Aziz       |
+|   111222333 | Jon        | Green     | Spock      |
+|   111222333 | Jon        | Green     | Webster    |
 |   123456789 | Yassin     | Raissouni | Loukach    |
+|   333444555 | Colleen    | Gellar    | Shabado    |
+|   444555666 | Sean       | Gellar    | Clooney    |
+|   444555666 | Sean       | Gellar    | Webster    |
+|   667766777 | Scotty     | Bing      | Shabado    |
+|   667766777 | Scotty     | Bing      | Spock      |
+|   667766777 | Scotty     | Bing      | Webster    |
 +-------------+------------+-----------+------------+
-1 row in set (0.00 sec)
+12 rows in set (0.00 sec)
 
 --------------
 UPDATE treats SET drLastName='Clooney' WHERE drLastName='Spock'
 --------------
 
-Query OK, 0 rows affected (0.01 sec)
-Rows matched: 0  Changed: 0  Warnings: 0
+Query OK, 3 rows affected (0.00 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
 
 --------------
 SELECT * FROM treats
@@ -440,8 +503,19 @@ SELECT * FROM treats
 +-------------+------------+-----------+------------+
 | pOHIPNumber | pFirstName | pLastName | drLastName |
 +-------------+------------+-----------+------------+
+|   110112113 | Bill       | Gellar    | Shabado    |
+|   111222111 | Suzzi      | Bing      | Clooney    |
+|   111222333 | Jon        | Green     | Aziz       |
+|   111222333 | Jon        | Green     | Clooney    |
+|   111222333 | Jon        | Green     | Webster    |
 |   123456789 | Yassin     | Raissouni | Loukach    |
+|   333444555 | Colleen    | Gellar    | Shabado    |
+|   444555666 | Sean       | Gellar    | Clooney    |
+|   444555666 | Sean       | Gellar    | Webster    |
+|   667766777 | Scotty     | Bing      | Clooney    |
+|   667766777 | Scotty     | Bing      | Shabado    |
+|   667766777 | Scotty     | Bing      | Webster    |
 +-------------+------------+-----------+------------+
-1 row in set (0.00 sec)
+12 rows in set (0.00 sec)
 
 Bye

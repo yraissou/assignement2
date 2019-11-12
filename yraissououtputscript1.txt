@@ -14,13 +14,13 @@ SHOW DATABASES
 | vetoffice          |
 | yraissouassign2db  |
 +--------------------+
-7 rows in set (0.01 sec)
+7 rows in set (0.00 sec)
 
 --------------
 DROP DATABASE IF EXISTS yraissouassign2db
 --------------
 
-Query OK, 4 rows affected (0.15 sec)
+Query OK, 4 rows affected (0.12 sec)
 
 --------------
 CREATE DATABASE yraissouassign2db
@@ -38,19 +38,19 @@ Empty set (0.00 sec)
 CREATE TABLE doctor ( LicenseNumber VARCHAR(4) NOT NULL, FirstName VARCHAR(20), LastName VARCHAR(20), Speciality VARCHAR(30), DateLicense DATE, WorksInHosCode VARCHAR(3), PRIMARY KEY (LicenseNumber))
 --------------
 
-Query OK, 0 rows affected (0.35 sec)
+Query OK, 0 rows affected (0.05 sec)
 
 --------------
 CREATE TABLE hospital ( HospitalCode VARCHAR(3) NOT NULL, Name VARCHAR(20), NumberOfBeds INT, City VARCHAR(20), Province VARCHAR(2), HeadDocId VARCHAR(4), PRIMARY KEY (HospitalCode), CONSTRAINT HeadDocId FOREIGN KEY (HeadDocId) REFERENCES doctor(LicenseNumber) )
 --------------
 
-Query OK, 0 rows affected (0.08 sec)
+Query OK, 0 rows affected (0.20 sec)
 
 --------------
 ALTER TABLE doctor ADD FOREIGN KEY (WorksInHosCode) REFERENCES hospital(HospitalCode)
 --------------
 
-Query OK, 0 rows affected (0.15 sec)
+Query OK, 0 rows affected (0.28 sec)
 Records: 0  Duplicates: 0  Warnings: 0
 
 --------------
@@ -63,34 +63,34 @@ Query OK, 0 rows affected (0.06 sec)
 ALTER TABLE patient ADD PRIMARY KEY (OHIPNumber)
 --------------
 
-Query OK, 0 rows affected (0.11 sec)
+Query OK, 0 rows affected (0.07 sec)
 Records: 0  Duplicates: 0  Warnings: 0
 
 --------------
 ALTER TABLE patient ADD FOREIGN KEY (DocIdAssignedTo) REFERENCES doctor(LicenseNumber)
 --------------
 
-Query OK, 0 rows affected (0.28 sec)
+Query OK, 0 rows affected (0.12 sec)
 Records: 0  Duplicates: 0  Warnings: 0
 
 --------------
 CREATE TABLE treats ( pOHIPNumber INT(9), pFirstName VARCHAR(20), pLastName VARCHAR(20), drLastName VARCHAR(20))
 --------------
 
-Query OK, 0 rows affected (0.11 sec)
+Query OK, 0 rows affected (0.05 sec)
 
 --------------
 ALTER TABLE treats ADD PRIMARY KEY (pOHIPNumber, drLastName)
 --------------
 
-Query OK, 0 rows affected (0.07 sec)
+Query OK, 0 rows affected (0.08 sec)
 Records: 0  Duplicates: 0  Warnings: 0
 
 --------------
 ALTER TABLE treats ADD FOREIGN KEY (pOHIPNumber) REFERENCES patient(OHIPNumber)
 --------------
 
-Query OK, 0 rows affected (0.10 sec)
+Query OK, 0 rows affected (0.11 sec)
 Records: 0  Duplicates: 0  Warnings: 0
 
 ERROR 1215 (HY000) at line 44: Cannot add foreign key constraint

@@ -6,9 +6,15 @@ SELECT LastName FROM patient
 +-----------+
 | LastName  |
 +-----------+
+| Gellar    |
+| Brown     |
+| Green     |
 | Raissouni |
+| Gellar    |
+| Gellar    |
+| Bing      |
 +-----------+
-1 row in set (0.00 sec)
+7 rows in set (0.00 sec)
 
 --------------
 SELECT DISTINCT LastName FROM patient
@@ -17,9 +23,13 @@ SELECT DISTINCT LastName FROM patient
 +-----------+
 | LastName  |
 +-----------+
+| Gellar    |
+| Brown     |
+| Green     |
 | Raissouni |
+| Bing      |
 +-----------+
-1 row in set (0.00 sec)
+5 rows in set (0.00 sec)
 
 --------------
 SELECT * FROM doctor ORDER BY LastName

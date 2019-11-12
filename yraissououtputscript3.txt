@@ -14,7 +14,7 @@ SELECT LastName FROM patient
 | Gellar    |
 | Bing      |
 +-----------+
-7 rows in set (0.00 sec)
+7 rows in set (0.01 sec)
 
 --------------
 SELECT DISTINCT LastName FROM patient
@@ -59,27 +59,83 @@ SELECT Name, HospitalCode FROM hospital WHERE NumberOfBeds>1500
 +----------+--------------+
 1 row in set (0.00 sec)
 
-ERROR 1064 (42000) at line 16: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Clooney';
-
--- Query 8
-SELECT Name, City, LastName FROM (SELECT* FROM doctor, hos' at line 1
 --------------
-SELECT LastName, FirstName FROM (SELECT* FROM doctor, hospital WHERE WorksInHosCode=HospitalCode) as o WHERE o.Name='St.Joseph; 
-
--- Query 6
-SELECT FirstName, LastName FROM patient WHERE LastName LIKE "G%";
-
--- Query 7
-SELECT pFirstName, pLastName FROM treats WHERE drLastName='Clooney';
-
--- Query 8
-SELECT Name, City, LastName FROM (SELECT* FROM doctor, hospital WHERE HeadDocId=LicenseNumber) as a;
-
--- Query 9
-SELECT SUM(NumberOfBeds) as 'Total Number of Beds' from hospital;
-
--- Query 10
-SELECT pFirstName, a1.FirstName FROM (SELECT* FROM treats,doctor WHERE treats.drLastName=doctor.LastName) as a1, (SELECT * FROM hospital,doctor WHERE hospital.HeadDocId=doctor.LicenseNumber) as a2 WHERE a1.FirstName=a2.FirstName;
+SELECT LastName, FirstName FROM (SELECT* FROM doctor, hospital WHERE WorksInHosCode=HospitalCode) AS o WHERE o.Name='St.Joseph'
 --------------
+
++------------+-----------+
+| LastName   | FirstName |
++------------+-----------+
+| Kavorikian | Bernie    |
+| Webster    | Mandy     |
+| Shabado    | Joey      |
++------------+-----------+
+3 rows in set (0.00 sec)
+
+--------------
+SELECT FirstName, LastName FROM patient WHERE LastName LIKE "G%"
+--------------
+
++-----------+----------+
+| FirstName | LastName |
++-----------+----------+
+| Bill      | Gellar   |
+| Jon       | Green    |
+| Colleen   | Gellar   |
+| Sean      | Gellar   |
++-----------+----------+
+4 rows in set (0.00 sec)
+
+--------------
+SELECT pFirstName, pLastName FROM treats WHERE drLastName='Clooney'
+--------------
+
++------------+-----------+
+| pFirstName | pLastName |
++------------+-----------+
+| Suzzi      | Bing      |
+| Jon        | Green     |
+| Sean       | Gellar    |
+| Scotty     | Bing      |
++------------+-----------+
+4 rows in set (0.00 sec)
+
+--------------
+SELECT Name, City, LastName FROM (SELECT* FROM doctor, hospital WHERE HeadDocId=LicenseNumber) AS a
+--------------
+
++-----------+----------+----------+
+| Name      | City     | LastName |
++-----------+----------+----------+
+| Victoria  | London   | Aziz     |
+| St.Joseph | London   | Shabado  |
+| Victoria  | Victoria | Spock    |
++-----------+----------+----------+
+3 rows in set (0.00 sec)
+
+--------------
+SELECT SUM(NumberOfBeds) AS 'Total Number of Beds' from hospital
+--------------
+
++----------------------+
+| Total Number of Beds |
++----------------------+
+|                 3800 |
++----------------------+
+1 row in set (0.00 sec)
+
+--------------
+SELECT pFirstName, a1.FirstName FROM (SELECT* FROM treats,doctor WHERE treats.drLastName=doctor.LastName) AS a1, (SELECT * FROM hospital,doctor WHERE hospital.HeadDocId=doctor.LicenseNumber) AS a2 WHERE a1.FirstName=a2.FirstName
+--------------
+
++------------+-----------+
+| pFirstName | FirstName |
++------------+-----------+
+| Jon        | Colleen   |
+| Scotty     | Joey      |
+| Colleen    | Joey      |
+| Bill       | Joey      |
++------------+-----------+
+4 rows in set (0.00 sec)
 
 Bye

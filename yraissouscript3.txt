@@ -13,7 +13,7 @@ SELECT * FROM doctor ORDER BY LastName;
 SELECT Name, HospitalCode FROM hospital WHERE NumberOfBeds>1500;
 
 -- Query 5
-SELECT LastName, FirstName FROM (SELECT* FROM doctor, hospital WHERE WorksInHosCode=HospitalCode) as o WHERE o.Name='St.Joseph; 
+SELECT LastName, FirstName FROM (SELECT* FROM doctor, hospital WHERE WorksInHosCode=HospitalCode) AS o WHERE o.Name='St.Joseph'; 
 
 -- Query 6
 SELECT FirstName, LastName FROM patient WHERE LastName LIKE "G%";
@@ -22,11 +22,11 @@ SELECT FirstName, LastName FROM patient WHERE LastName LIKE "G%";
 SELECT pFirstName, pLastName FROM treats WHERE drLastName='Clooney';
 
 -- Query 8
-SELECT Name, City, LastName FROM (SELECT* FROM doctor, hospital WHERE HeadDocId=LicenseNumber) as a;
+SELECT Name, City, LastName FROM (SELECT* FROM doctor, hospital WHERE HeadDocId=LicenseNumber) AS a;
 
 -- Query 9
-SELECT SUM(NumberOfBeds) as 'Total Number of Beds' from hospital;
+SELECT SUM(NumberOfBeds) AS 'Total Number of Beds' from hospital;
 
 -- Query 10
-SELECT pFirstName, a1.FirstName FROM (SELECT* FROM treats,doctor WHERE treats.drLastName=doctor.LastName) as a1, (SELECT * FROM hospital,doctor WHERE hospital.HeadDocId=doctor.LicenseNumber) as a2 WHERE a1.FirstName=a2.FirstName;
+SELECT pFirstName, a1.FirstName FROM (SELECT* FROM treats,doctor WHERE treats.drLastName=doctor.LastName) AS a1, (SELECT * FROM hospital,doctor WHERE hospital.HeadDocId=doctor.LicenseNumber) AS a2 WHERE a1.FirstName=a2.FirstName;
 
